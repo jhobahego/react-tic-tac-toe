@@ -12,7 +12,10 @@ function App() {
         {
           board.map((_, index) => {
             return (
-              <div className='square'>
+              <div 
+                className='square'
+                key={index}
+              >
                 {index}
               </div>
             )
