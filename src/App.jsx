@@ -1,5 +1,10 @@
 import { useState } from 'react'
 
+const TURNS = {
+  X: 'x',
+  O: 'o'
+}
+
 const Square = ({ children, isSelected, updateBoard, index }) => {
   const className = `square ${isSelected ? 'is-selected' : ''}`
 
@@ -18,10 +23,14 @@ function App() {
   const [board, setBoard] = useState(
     Array(9).fill(null)
   )
+  const [turn, setTurn] = useState(TURNS.x)
 
   const updateBoard = (index) => {
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
+    setTurn(newTurn)
+
     const newBoard = [...board]
-    newBoard[index] = '*'
+    newBoard[index] = turn
     setBoard(newBoard)
   }
 
@@ -42,6 +51,15 @@ function App() {
             )
           })
         }
+      </section>
+
+      <section className="turn">
+        <Square isSelected={turn === TURNS.X}>
+          {TURNS.X}
+        </Square>
+        <Square isSelected={turn === TURNS.O}>
+          {TURNS.O}
+        </Square>
       </section>
     </main>
   )
