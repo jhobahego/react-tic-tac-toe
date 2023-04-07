@@ -52,6 +52,10 @@ function App() {
     return null
   }
 
+  const checkEndGame = (board) => {
+    return board.every(square => square !== null)
+  }
+
   const updateBoard = (index) => {
     if (board[index] || winner) return;
 
@@ -65,6 +69,8 @@ function App() {
     const newWinner = checkWinner(newBoard)
     if(newWinner){
       setWinner(newWinner)
+    }else if(checkEndGame(newBoard)){
+      setWinner(false)
     }
   }
 
