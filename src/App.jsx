@@ -1,9 +1,29 @@
 import { useState } from 'react'
 
+const Square = ({ children, isSelected, updateBoard, index }) => {
+  const className = `square ${isSelected ? 'is-selected' : ''}`
+
+  const handleClick = () => {
+    updateBoard(index)
+  }
+
+  return (
+    <div onClick={handleClick} className={className}>
+      {children}
+    </div>
+  )
+}
+
 function App() {
   const [board, setBoard] = useState(
     Array(9).fill(null)
   )
+
+  const updateBoard = (index) => {
+    const newBoard = [...board]
+    newBoard[index] = '*'
+    setBoard(newBoard)
+  }
 
   return (
     <main className="board">
@@ -12,12 +32,13 @@ function App() {
         {
           board.map((_, index) => {
             return (
-              <div 
-                className='square'
+              <Square
                 key={index}
+                index={index}
+                updateBoard={updateBoard}
               >
-                {index}
-              </div>
+                {board[index]}
+              </Square>
             )
           })
         }
