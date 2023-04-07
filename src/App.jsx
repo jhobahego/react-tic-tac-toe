@@ -48,6 +48,9 @@ function App() {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
+
+    localStorage.removeItem('board')
+    localStorage.removeItem('turn')
   }
 
   return (
